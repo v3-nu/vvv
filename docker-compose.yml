@@ -1,0 +1,6 @@
+services:
+  clycli:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: clysec/clycli:latest

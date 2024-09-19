@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/clysec/clytool/cmd"
+	"github.com/clysec/clycli/cmd"
 )
 
 func main() {
