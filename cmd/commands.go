@@ -5,6 +5,7 @@ import (
 
 	"github.com/clysec/clycli/cmd/commands/install"
 	"github.com/clysec/clycli/cmd/commands/kubectl"
+	"github.com/clysec/clycli/cmd/commands/packages"
 	"github.com/clysec/clycli/cmd/commands/uploads"
 	"github.com/clysec/clycli/cmd/utils"
 	gofigure "github.com/common-nighthawk/go-figure"
@@ -17,6 +18,7 @@ var registerGroups = []utils.CommandGroup{
 	kubectl.ExportCommands,
 	install.ExportCommands,
 	uploads.ExportCommands,
+	packages.ExportCommands,
 }
 
 func Execute() {
