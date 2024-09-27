@@ -74,5 +74,21 @@ uploads:
       - deb
     mode: binary
     username: ${{ secrets.UPLOAD_DEBPKG_USER }}
-    target: https://git.cloudyne.io/api/packages/linux/debian/all/main/upload
+    target: https://git.cloudyne.io//api/packages/linux/debian/pool/all/main/upload
+    custom_artifact_name: true
+  - name: "apkpkg"
+    method: "PUT"
+    exts:
+      - apk
+    mode: binary
+    username: ${{ secrets.UPLOAD_DEBPKG_USER }}
+    target: https://git.cloudyne.io/api/packages/linux/alpine/all/repository
+    custom_artifact_name: true
+  - name: "rpmpkg"
+    method: "PUT"
+    exts:
+      - rpm
+    mode: binary
+    username: ${{ secrets.UPLOAD_DEBPKG_USER }}
+    target: https://git.cloudyne.io/api/packages/linux/rpm/upload
     custom_artifact_name: true
