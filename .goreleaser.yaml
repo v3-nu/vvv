@@ -73,7 +73,7 @@ uploads:
     exts:
       - deb
     mode: archive
-    username: "{{ .Env.UPLOAD_DEBPKG_USER }}"
+    username: "debian_upload"
     target: https://git.cloudyne.io/api/packages/linux/debian/pool/all/main/upload
     custom_artifact_name: true
   - name: "apkpkg"
@@ -81,7 +81,7 @@ uploads:
     exts:
       - apk
     mode: archive
-    username: "{{ .Env.UPLOAD_DEBPKG_USER }}"
+    username: "debian_upload"
     target: https://git.cloudyne.io/api/packages/linux/alpine/all/repository
     custom_artifact_name: true
   - name: "rpmpkg"
@@ -89,6 +89,6 @@ uploads:
     exts:
       - rpm
     mode: archive
-    username: "{{ .Env.UPLOAD_DEBPKG_USER }}"
+    username: "debian_upload"
     target: https://git.cloudyne.io/api/packages/linux/rpm/upload
     custom_artifact_name: true
