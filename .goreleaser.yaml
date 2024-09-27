@@ -1,0 +1,78 @@
+version: 2
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+
+archives:
+  - format: tar.gz
+    # this name template makes the OS and Arch compatible with the results of `uname`.
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end }}
+    # use zip for windows archives
+    format_overrides:
+      - goos: windows
+        format: zip
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+
+nfpms:
+  - id: clycli
+    package_name: "clycli"
+    description: "CLY CLI - A CLI tool for various tasks"
+    vendor: "Cloudyne Systems"
+    maintainer: Cloudyne Systems <support@cloudyne.org>
+    file_name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end }}
+    formats:
+      - deb
+      - apk
+      - rpm
+    bindir: /usr/local/bin
+
+release:
+  gitea:
+    owner: linux
+    name: dagosy-worker
+
+gitea_urls:
+  api: https://git.cloudyne.io/api/v1
+  download: https://git.cloudyne.io
+  # set to true if you use a self-signed certificate
+  skip_tls_verify: false
+
+dockers:
+  - image_templates:
+    - clysec/dagosy-worker:{{ .Tag }}
+    - clysec/dagosy-worker:latest
+    - ghcr.io/clysec/dagosy-worker:{{ .Tag }}
+    - ghcr.io/clysec/dagosy-worker:latest
+  
+uploads:
+  - name: "debpkg"
+    method: "PUT"
+    exts:
+      - deb
+    mode: binary
+    username: ${{ secrets.UPLOAD_DEBPKG_USER }}
+    target: https://git.cloudyne.io/api/packages/linux/debian/all/main/upload
+    custom_artifact_name: true
