@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
@@ -67,6 +68,12 @@ func AliasCommandArgpos(command string, argpos ...int) func(cmd *cobra.Command, 
 // }
 
 func RunBash(command string, args ...any) {
+	countArgs := strings.Count(command, "%s")
+	if countArgs < len(args) {
+		repeat := len(args) - countArgs
+		command += strings.Repeat(" %s", repeat)
+	}
+
 	cx := exec.Command("bash", "-c", fmt.Sprintf(command, args...))
 	cx.Env = os.Environ()
 	cx.Stdout = os.Stdout
