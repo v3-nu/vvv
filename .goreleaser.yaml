@@ -52,7 +52,7 @@ nfpms:
 release:
   gitea:
     owner: linux
-    name: dagosy-worker
+    name: clycli
 
 gitea_urls:
   api: https://git.cloudyne.io/api/v1
