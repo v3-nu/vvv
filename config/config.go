@@ -139,7 +139,7 @@ func (c *Config) SaveConfig() error {
 	aliasRcLocation := GetAliasRcLocation()
 	EnsureFileExists(aliasRcLocation, []byte(""))
 	for alias, command := range aliases {
-		aliasRcContent += fmt.Sprintf("  alias %s='%s'\r\n", alias, command)
+		aliasRcContent += fmt.Sprintf("alias %s='%s'\n", alias, command)
 	}
 
 	err = os.WriteFile(aliasRcLocation, []byte(aliasRcContent), 0o600)
