@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/clysec/clycli/config"
+	"github.com/clysec/clycli/cmd/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -16,7 +16,7 @@ func SetConfig(cmd *cobra.Command) {
 			Short:   "Set configuration key/value",
 			Args:    cobra.ExactArgs(3),
 			Run: func(cmd *cobra.Command, args []string) {
-				cfg := cmd.Context().Value(config.ConfigKey("config")).(*config.Config)
+				cfg := cmd.Context().Value(ConfigKey("config")).(*Config)
 
 				err := cfg.SetConfigValue(args[0], args[1], args[2])
 				if err != nil {
@@ -35,10 +35,10 @@ func GetConfig(cmd *cobra.Command) {
 			Short:   "Get configuration value",
 			Args:    cobra.MaximumNArgs(2),
 			Run: func(cmd *cobra.Command, args []string) {
-				cfg := cmd.Context().Value(config.ConfigKey("config")).(*config.Config)
+				cfg := cmd.Context().Value(ConfigKey("config")).(*Config)
 				avail := cfg.GetCurrentSettingsMap()
 
-				fmt.Println("Settings:", "\r\n")
+				fmt.Printf("Settings:\r\n\r\n")
 
 				if len(args) == 2 && avail[args[0]] != nil {
 					fmt.Printf("%s.%s = %s\n", args[0], args[1], avail[args[0]][args[1]])
@@ -65,4 +65,16 @@ func GetConfig(cmd *cobra.Command) {
 			},
 		},
 	)
+}
+
+var ExportCommands = utils.CommandGroup{
+	Command: &cobra.Command{
+		Use:     "config",
+		Aliases: []string{"cfg"},
+		Short:   "Manage configuration, aliases and settings for clycli",
+	},
+	Children: []func(*cobra.Command){
+		SetConfig,
+		GetConfig,
+	},
 }

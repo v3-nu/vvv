@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	configcmd "github.com/clysec/clycli/cmd/commands/config"
+	"github.com/clysec/clycli/cmd/commands/alias"
 	"github.com/clysec/clycli/cmd/commands/install"
 	"github.com/clysec/clycli/cmd/commands/kubectl"
 	"github.com/clysec/clycli/cmd/commands/packages"
@@ -23,7 +23,8 @@ var registerGroups = []utils.CommandGroup{
 	install.ExportCommands,
 	uploads.ExportCommands,
 	packages.ExportCommands,
-	configcmd.ExportCommands,
+	config.ExportCommands,
+	alias.ExportCommands,
 }
 
 func Execute() {
@@ -34,9 +35,6 @@ func Execute() {
 		Short:   "A command-line utility with various functionality",
 		Long:    figure.ColorString(),
 		Aliases: []string{"cly", "cy", "cc"},
-		// PreRun: func(cmd *cobra.Command, args []string) {
-		// 	log.Fatalf("ASDASD")
-		// },
 	}
 
 	for _, group := range registerGroups {

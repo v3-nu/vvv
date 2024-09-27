@@ -134,6 +134,23 @@ func (c *Config) SaveConfig() error {
 		return err
 	}
 
+	aliasRcLocation := GetAliasRcLocation()
+	EnsureFileExists(aliasRcLocation, []byte(""))
+
+	// Check if __clycli_aliases_registered is already registered as a function
+	aliasRcContent := "if [ -z \"$(type -t __clycli_aliases_registered)\" ]; then \r\necho \"function already registered\"; \r\nreturn;\r\nfi\r\n"
+
+	for alias, command := range aliases {
+		aliasRcContent += fmt.Sprintf("alias %s='%s'\r\n", alias, command)
+	}
+
+	aliasRcContent += "\r\nfunction __clycli_aliases_registered() { return }\r\n"
+
+	err = os.WriteFile(aliasRcLocation, []byte(aliasRcContent), 0o600)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 
