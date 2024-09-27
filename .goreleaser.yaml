@@ -60,12 +60,12 @@ gitea_urls:
   # set to true if you use a self-signed certificate
   skip_tls_verify: false
 
-dockers:
-  - image_templates:
-    - clysec/dagosy-worker:{{ .Tag }}
-    - clysec/dagosy-worker:latest
-    - ghcr.io/clysec/dagosy-worker:{{ .Tag }}
-    - ghcr.io/clysec/dagosy-worker:latest
+# dockers:
+#   - image_templates:
+#     - clysec/dagosy-worker:{{ .Tag }}
+#     - clysec/dagosy-worker:latest
+#     - ghcr.io/clysec/dagosy-worker:{{ .Tag }}
+#     - ghcr.io/clysec/dagosy-worker:latest
   
 uploads:
   - name: "debpkg"
