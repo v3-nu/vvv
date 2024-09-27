@@ -41,6 +41,7 @@ jobs:
         UPLOAD_DEBPKG_SECRET: ${{ secrets.UPLOAD_DEBPKG_SECRET }}
         UPLOAD_APKPKG_SECRET: ${{ secrets.UPLOAD_DEBPKG_SECRET }}
         UPLOAD_RPMPKG_SECRET: ${{ secrets.UPLOAD_DEBPKG_SECRET }}
+        UPLOAD_DEBPKG_USER: ${{ secrets.UPLOAD_DEBPKG_USER }}
     
     - name: Upload artifacts
       uses: actions/upload-artifact@v4

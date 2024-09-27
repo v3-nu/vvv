@@ -5,8 +5,8 @@ builds:
       - CGO_ENABLED=0
     goos:
       - linux
-      - windows
-      - darwin
+      # - windows
+      # - darwin
 
 archives:
   - format: tar.gz
@@ -19,9 +19,9 @@ archives:
       {{- else }}{{ .Arch }}{{ end }}
       {{- if .Arm }}v{{ .Arm }}{{ end }}
     # use zip for windows archives
-    format_overrides:
-      - goos: windows
-        format: zip
+    # format_overrides:
+    #   - goos: windows
+    #     format: zip
 
 changelog:
   sort: asc
@@ -72,23 +72,23 @@ uploads:
     method: "PUT"
     exts:
       - deb
-    mode: binary
-    username: ${{ secrets.UPLOAD_DEBPKG_USER }}
+    mode: archive
+    username: "{{ .Env.UPLOAD_DEBPKG_USER }}"
     target: https://git.cloudyne.io//api/packages/linux/debian/pool/all/main/upload
     custom_artifact_name: true
   - name: "apkpkg"
     method: "PUT"
     exts:
       - apk
-    mode: binary
-    username: ${{ secrets.UPLOAD_DEBPKG_USER }}
+    mode: archive
+    username: "{{ .Env.UPLOAD_DEBPKG_USER }}"
     target: https://git.cloudyne.io/api/packages/linux/alpine/all/repository
     custom_artifact_name: true
   - name: "rpmpkg"
     method: "PUT"
     exts:
       - rpm
-    mode: binary
-    username: ${{ secrets.UPLOAD_DEBPKG_USER }}
+    mode: archive
+    username: "{{ .Env.UPLOAD_DEBPKG_USER }}"
     target: https://git.cloudyne.io/api/packages/linux/rpm/upload
     custom_artifact_name: true
