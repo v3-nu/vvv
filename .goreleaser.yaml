@@ -74,7 +74,7 @@ uploads:
       - deb
     mode: archive
     username: "{{ .Env.UPLOAD_DEBPKG_USER }}"
-    target: https://git.cloudyne.io//api/packages/linux/debian/pool/all/main/upload
+    target: https://git.cloudyne.io/api/packages/linux/debian/pool/all/main/upload
     custom_artifact_name: true
   - name: "apkpkg"
     method: "PUT"
