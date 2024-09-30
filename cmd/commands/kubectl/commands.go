@@ -23,7 +23,7 @@ func KubectlSetContext(cmd *cobra.Command) {
 			Aliases: []string{"setc", "con", "usectx", "usec"},
 			Short:   "Set the current-context in the kubeconfig",
 			Args:    cobra.ExactArgs(1),
-			Run:     utils.AliasCommand("kubectl config set-context"),
+			Run:     utils.AliasCommand("kubectl config use-context %s"),
 		},
 	)
 }
@@ -35,7 +35,7 @@ func KubectlSetNamespace(cmd *cobra.Command) {
 			Aliases: []string{"setn", "ns"},
 			Short:   "Set the current namespace in the kubeconfig",
 			Args:    cobra.ExactArgs(1),
-			Run:     utils.AliasCommand("kubectl config set-context --current --namespace"),
+			Run:     utils.AliasCommand("kubectl config set-context --current --namespace %s"),
 		},
 	)
 }

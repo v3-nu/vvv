@@ -10,3 +10,10 @@ Command-line utility for various actions
     - patchfinalizers (alias: patchfin)
   - install
     - kubectl
+
+
+## TODO:
+- Change alias functionality
+  - Aliasrc: (ex)
+    alias clycli="$(which clycli) alias exec [aliasname] [args]"
+  - Run alias with utils.AliasCommand with %s available
