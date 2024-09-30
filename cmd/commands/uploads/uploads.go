@@ -44,12 +44,6 @@ func UploadPastebin(cmd *cobra.Command) {
 				fmt.Println(string(data))
 
 				conn.Close()
-
-				// stdi, err := io.ReadAll(os.Stdin)
-				// if err != nil {
-				// 	fmt.Println("Error reading stdin: ", err)
-				// }
-				// fmt.Println("Piped data: ", string(stdi))
 			},
 		},
 	)

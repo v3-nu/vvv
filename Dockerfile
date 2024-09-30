@@ -1,17 +1,10 @@
-FROM docker.io/golang:1.23.0 AS builder
+FROM alpine:latest
 
-WORKDIR /app
+RUN apk update && apk add --no-cache ca-certificates && update-ca-certificates
 
-RUN apt update && apt -y dist-upgrade && apt -y install curl wget jq
+FROM scratch
 
-ADD . .
+COPY clycli /
+COPY --from=0 /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
-RUN go get && go mod tidy && go build -o app.bin && chmod +x app.bin
-
-# FROM ubuntu:latest
-
-# COPY --from=builder /app/app.bin /app.bin 
-
-# RUN apt update && apt -y dist-upgrade && apt -y install curl wget jq
-
-ENTRYPOINT [ "/app/app.bin" ]
+ENTRYPOINT ["/clycli"]

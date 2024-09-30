@@ -52,3 +52,22 @@ func KubectlRemoveFinalizers(cmd *cobra.Command) {
 		},
 	)
 }
+
+func KubectlGetDecodedSecret(cmd *cobra.Command) {
+	cmd.AddCommand(
+		&cobra.Command{
+			Use:     "getsecret [namespace] [secret]",
+			Aliases: []string{"getsec", "gsec"},
+			Short:   "Get a secret and decode it",
+			Args:    cobra.MaximumNArgs(2),
+			Run: func(cmd *cobra.Command, args []string) {
+				if len(args) == 2 {
+					utils.RunBash("kubectl get secret -n %s %s -o go-template='{{range $k,$v := .data}}{{printf \"%%s: \" $k}}{{if not $v}}{{$v}}{{else}}{{$v | base64decode}}{{end}}{{\"\\n\"}}{{end}}'", args[0], args[1])
+				}
+				if len(args) == 1 {
+					utils.RunBash("kubectl get secret %s -o go-template='{{range $k,$v := .data}}{{printf \"%%s: \" $k}}{{if not $v}}{{$v}}{{else}}{{$v | base64decode}}{{end}}{{\"\\n\"}}{{end}}'", args[0])
+				}
+			},
+		},
+	)
+}
