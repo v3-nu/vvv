@@ -5,12 +5,11 @@ builds:
       - CGO_ENABLED=0
     goos:
       - linux
-      # - windows
-      # - darwin
+      - windows
+      - darwin
 
 archives:
   - format: tar.gz
-    # this name template makes the OS and Arch compatible with the results of `uname`.
     name_template: >-
       {{ .ProjectName }}_
       {{- title .Os }}_
@@ -18,10 +17,10 @@ archives:
       {{- else if eq .Arch "386" }}i386
       {{- else }}{{ .Arch }}{{ end }}
       {{- if .Arm }}v{{ .Arm }}{{ end }}
-    # use zip for windows archives
-    # format_overrides:
-    #   - goos: windows
-    #     format: zip
+    use zip for windows archives
+    format_overrides:
+      - goos: windows
+        format: zip
 
 changelog:
   sort: asc
@@ -54,19 +53,13 @@ release:
     owner: linux
     name: clycli
 
-gitea_urls:
-  api: https://git.cloudyne.io/api/v1
-  download: https://git.cloudyne.io
-  # set to true if you use a self-signed certificate
-  skip_tls_verify: false
+dockers:
+  - image_templates:
+    - clysec/clycli:{{ .Tag }}
+    - clysec/clycli:latest
+    - ghcr.io/clysec/clycli:{{ .Tag }}
+    - ghcr.io/clysec/clycli:latest
 
-# dockers:
-#   - image_templates:
-#     - clysec/dagosy-worker:{{ .Tag }}
-#     - clysec/dagosy-worker:latest
-#     - ghcr.io/clysec/dagosy-worker:{{ .Tag }}
-#     - ghcr.io/clysec/dagosy-worker:latest
-  
 uploads:
   - name: "debpkg"
     method: "PUT"
