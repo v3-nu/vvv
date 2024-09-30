@@ -47,9 +47,6 @@ nfpms:
       - deb
       - apk
       - rpm
-      - termux.deb
-      - archlinux
-      - ipk
     bindir: /usr/local/bin
 
 release:
