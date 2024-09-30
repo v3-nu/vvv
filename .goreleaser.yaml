@@ -53,13 +53,13 @@ release:
     owner: linux
     name: clycli
 
-dockers:
-  - use: podman
-    image_templates:
-    - clysec/clycli:{{ .Tag }}
-    - clysec/clycli:latest
-    - ghcr.io/clysec/clycli:{{ .Tag }}
-    - ghcr.io/clysec/clycli:latest
+# dockers:
+#   - use: podman
+#     image_templates:
+#     - clysec/clycli:{{ .Tag }}
+#     - clysec/clycli:latest
+#     - ghcr.io/clysec/clycli:{{ .Tag }}
+#     - ghcr.io/clysec/clycli:latest
 
 uploads:
   - name: "debpkg"
