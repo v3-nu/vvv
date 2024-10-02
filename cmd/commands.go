@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/clysec/clycli/cmd/commands/alias"
+	"github.com/clysec/clycli/cmd/commands/crypto"
 	"github.com/clysec/clycli/cmd/commands/install"
 	"github.com/clysec/clycli/cmd/commands/kubectl"
 	"github.com/clysec/clycli/cmd/commands/packages"
@@ -25,6 +26,7 @@ var registerGroups = []utils.CommandGroup{
 	packages.ExportCommands,
 	config.ExportCommands,
 	alias.ExportCommands,
+	crypto.ExportCommands,
 }
 
 func Execute() {
