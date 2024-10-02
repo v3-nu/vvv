@@ -55,10 +55,6 @@ release:
   github:
     owner: clysec
     name: clycli
-    
-  gitea:
-    owner: linux
-    name: clycli
 
 # dockers:
 #   - use: podman
