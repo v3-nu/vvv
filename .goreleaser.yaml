@@ -52,6 +52,10 @@ nfpms:
     bindir: /usr/local/bin
 
 release:
+  github:
+    owner: clysec
+    name: clycli
+    
   gitea:
     owner: linux
     name: clycli
