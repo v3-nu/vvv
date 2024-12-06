@@ -18,5 +18,6 @@ var ExportCommands = utils.CommandGroup{
 		InstallKubectl,
 		InstallJupyterBashKernel,
 		InstallNodejs,
+		InstallAcmeShell,
 	},
 }

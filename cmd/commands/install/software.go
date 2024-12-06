@@ -109,3 +109,43 @@ func InstallNodejs(cmd *cobra.Command) {
 		},
 	)
 }
+
+func InstallAcmeShell(cmd *cobra.Command) {
+	acmeRepo := "https://github.com/acmesh-official/acme.sh.git"
+
+	acmeCommand := &cobra.Command{
+		Use:     "acmesh",
+		Aliases: []string{"acme.sh"},
+		Short:   "Install Acme Shell (acme.sh)",
+		Run: func(cmd *cobra.Command, args []string) {
+			// Ensure directories exist
+			utils.RunBash(utils.SudoIfNotRoot("mkdir -p %s %s && chown -R %s:%s %s %s"), cmd.Flag("installDirectory").Value.String(), cmd.Flag("configDirectory").Value.String(), cmd.Flag("user").Value.String(), cmd.Flag("user").Value.String(), cmd.Flag("installDirectory").Value.String(), cmd.Flag("configDirectory").Value.String())
+
+			// Install acme.sh
+			utils.RunBash(utils.SudoIfNotRoot("git clone %s %s && cd %s && ./acme.sh --install --home %s --config-home %s --user %s"), acmeRepo, cmd.Flag("installDirectory").Value.String(), cmd.Flag("installDirectory").Value.String(), cmd.Flag("installDirectory").Value.String(), cmd.Flag("configDirectory").Value.String(), cmd.Flag("user").Value.String())
+
+			// Add to path
+			if !cmd.Flag("skip-alias").Changed {
+				utils.RunBash(utils.SudoIfNotRoot("ln -s %s/acme.sh /usr/local/bin/acme.sh"), cmd.Flag("installDirectory").Value.String())
+			}
+
+			// If email is provided, register for an account
+			if cmd.Flag("email").Changed {
+				utils.RunBash(utils.SudoIfNotRoot("acme.sh --register-account -m %s"), cmd.Flag("email").Value.String())
+			}
+
+			fmt.Println("Acme.sh installed successfully")
+		},
+	}
+
+	acmeCommand.Flags().StringP("email", "e", "", "Email address to use for ACME account")
+	acmeCommand.Flags().StringP("acme-server", "s", "https://acme.zerossl.com/v2/DV90", "ACME server to use, default is zerossl")
+
+	acmeCommand.Flags().StringP("installDirectory", "i", "/var/lib/acme.sh", "The install directory for acme.sh")
+	acmeCommand.Flags().StringP("configDirectory", "c", "/etc/ssl/acme.sh", "The install directory for acme.sh")
+	acmeCommand.Flags().StringP("user", "u", "root", "The user to run acme.sh as")
+
+	acmeCommand.Flags().BoolP("skip-alias", "a", false, "Skip adding acme.sh to path")
+
+	cmd.AddCommand(acmeCommand)
+}
