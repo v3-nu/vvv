@@ -15,10 +15,10 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-var DefaultSettingsLocation = "~/.clycli/settings.yaml"
-var DefaultAliasConfigLocation = "~/.clycli/aliases.yaml"
-var DefaultAliasRcLocation = "~/.clycli/.aliasrc"
-var DefaultCacheLocation = "~/.cache/clycli"
+var DefaultSettingsLocation = "~/.vvv/settings.yaml"
+var DefaultAliasConfigLocation = "~/.vvv/aliases.yaml"
+var DefaultAliasRcLocation = "~/.vvv/.aliasrc"
+var DefaultCacheLocation = "~/.cache/vvv"
 
 type ConfigKey string
 
@@ -35,32 +35,32 @@ func ExpandPath(path string) string {
 }
 
 func GetSettingsLocation() string {
-	if os.Getenv("CLYCLI_SETTINGS_LOCATION") != "" {
-		return os.Getenv("CLYCLI_SETTINGS_LOCATION")
+	if os.Getenv("vvv_SETTINGS_LOCATION") != "" {
+		return os.Getenv("vvv_SETTINGS_LOCATION")
 	}
 
 	return ExpandPath(DefaultSettingsLocation)
 }
 
 func GetAliasConfigLocation() string {
-	if os.Getenv("CLYCLI_ALIAS_CONFIG_LOCATION") != "" {
-		return os.Getenv("CLYCLI_ALIAS_CONFIG_LOCATION")
+	if os.Getenv("vvv_ALIAS_CONFIG_LOCATION") != "" {
+		return os.Getenv("vvv_ALIAS_CONFIG_LOCATION")
 	}
 
 	return ExpandPath(DefaultAliasConfigLocation)
 }
 
 func GetAliasRcLocation() string {
-	if os.Getenv("CLYCLI_ALIAS_RC_LOCATION") != "" {
-		return os.Getenv("CLYCLI_ALIAS_RC_LOCATION")
+	if os.Getenv("vvv_ALIAS_RC_LOCATION") != "" {
+		return os.Getenv("vvv_ALIAS_RC_LOCATION")
 	}
 
 	return ExpandPath(DefaultAliasRcLocation)
 }
 
 func GetCacheLocation() string {
-	if os.Getenv("CLYCLI_CACHE_LOCATION") != "" {
-		return os.Getenv("CLYCLI_CACHE_LOCATION")
+	if os.Getenv("vvv_CACHE_LOCATION") != "" {
+		return os.Getenv("vvv_CACHE_LOCATION")
 	}
 
 	return ExpandPath(DefaultCacheLocation)

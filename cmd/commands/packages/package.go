@@ -4,8 +4,8 @@ import (
 	"log"
 	"strings"
 
-	"github.com/v3-nu/vv/cmd/utils"
 	"github.com/spf13/cobra"
+	"github.com/v3-nu/vvv/cmd/utils"
 )
 
 func GetVendor(cmd *cobra.Command, args []string) Vendor {
@@ -136,7 +136,7 @@ func GetCobraCommandGroup() utils.CommandGroup {
 			Use:     "packages [command] [flags]",
 			Short:   "packages",
 			Long:    "packages",
-			Example: "clycli packages install -y <package>",
+			Example: "vvv packages install -y <package>",
 			Aliases: []string{"package", "pkg", "p"},
 		},
 		Children: []func(*cobra.Command){

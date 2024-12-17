@@ -27,7 +27,7 @@ go install github.com/cloudyne-io/vv
 ```
 
 ### Binaries
-You can also download the binaries from the [Releases](https://github.com/v3-nu/vv/releases) page.
+You can also download the binaries from the [Releases](https://github.com/v3-nu/vvv/releases) page.
 
 ## Commands
 - [x] vv
@@ -51,10 +51,10 @@ You can also download the binaries from the [Releases](https://github.com/v3-nu/
 
 
 ## Default Aliases
-- [ ] vvk - vv kubectl
-- [ ] vvi - vv install
-- [ ] vvp - vv package
-- [ ] kubens - vv kubectl set-ns
-- [ ] kubectx - vv kubectl getctx
-- [ ] kubeuse - vv kubectl use-context
-- [ ] kubesec - vv kubectl getsecret
+- [ ] vvk - vvv vv kubectl
+- [ ] vvi - vvv install
+- [ ] vvp - vvv package
+- [ ] kubens - vvv kubectl set-ns
+- [ ] kubectx - vvv kubectl getctx
+- [ ] kubeuse - vvv kubectl use-context
+- [ ] kubesec - vvv kubectl getsecret

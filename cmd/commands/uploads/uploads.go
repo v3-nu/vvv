@@ -6,8 +6,8 @@ import (
 	"net"
 	"os"
 
-	"github.com/v3-nu/vv/cmd/utils"
 	"github.com/spf13/cobra"
+	"github.com/v3-nu/vvv/cmd/utils"
 )
 
 var ExportCommands = utils.CommandGroup{
@@ -27,7 +27,7 @@ func UploadPastebin(cmd *cobra.Command) {
 			Use:     "pastebin",
 			Aliases: []string{"paste", "pb"},
 			Short:   "Upload a file to pastebin",
-			Long:    "Upload a file to pastebin. To configure the pastebin server and type of service, see the \"clycli config upload pastebin\" command.",
+			Long:    "Upload a file to pastebin. To configure the pastebin server and type of service, see the \"vvv config upload pastebin\" command.",
 			Run: func(cmd *cobra.Command, args []string) {
 				conn, err := net.Dial("tcp", "termbin.com:9999")
 				if err != nil {

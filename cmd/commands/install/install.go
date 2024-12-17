@@ -1,8 +1,8 @@
 package install
 
 import (
-	"github.com/v3-nu/vv/cmd/utils"
 	"github.com/spf13/cobra"
+	"github.com/v3-nu/vvv/cmd/utils"
 )
 
 var ExportCommands = utils.CommandGroup{

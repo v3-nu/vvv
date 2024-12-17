@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/v3-nu/vv/cmd/utils"
 	"github.com/spf13/cobra"
+	"github.com/v3-nu/vvv/cmd/utils"
 )
 
 func SetConfig(cmd *cobra.Command) {
@@ -71,7 +71,7 @@ var ExportCommands = utils.CommandGroup{
 	Command: &cobra.Command{
 		Use:     "config",
 		Aliases: []string{"cfg"},
-		Short:   "Manage configuration, aliases and settings for clycli",
+		Short:   "Manage configuration, aliases and settings for vvv",
 	},
 	Children: []func(*cobra.Command){
 		SetConfig,

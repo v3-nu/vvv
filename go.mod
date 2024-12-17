@@ -1,4 +1,4 @@
-module github.com/v3-nu/vv
+module github.com/v3-nu/vvv
 
 go 1.22.3
 

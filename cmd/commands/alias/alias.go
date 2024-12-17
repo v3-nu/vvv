@@ -6,16 +6,16 @@ import (
 
 	"log"
 
-	"github.com/v3-nu/vv/cmd/utils"
-	"github.com/v3-nu/vv/config"
 	"github.com/spf13/cobra"
+	"github.com/v3-nu/vvv/cmd/utils"
+	"github.com/v3-nu/vvv/config"
 )
 
 var ExportCommands = utils.CommandGroup{
 	Command: &cobra.Command{
 		Use:   "alias",
 		Short: "Manage shell aliases",
-		Long:  "Manage shell aliases through in the .clycli/.aliasrc file",
+		Long:  "Manage shell aliases through in the .vvv/.aliasrc file",
 	},
 	Children: []func(*cobra.Command){
 		ListAliases,

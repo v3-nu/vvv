@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/v3-nu/vv/config"
+	"github.com/v3-nu/vvv/config"
 )
 
 func TestGetAvailableSettings(t *testing.T) {

@@ -6,8 +6,8 @@ import (
 	"os"
 	"regexp"
 
-	"github.com/v3-nu/vv/cmd/utils"
 	"github.com/spf13/cobra"
+	"github.com/v3-nu/vvv/cmd/utils"
 )
 
 func ReplaceText(cmd *cobra.Command) {
