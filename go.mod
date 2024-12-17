@@ -1,4 +1,4 @@
-module github.com/clysec/clycli
+module github.com/v3-nu/vv
 
 go 1.22.3
 

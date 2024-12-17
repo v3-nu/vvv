@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/clysec/clycli/cmd/utils"
+	"github.com/v3-nu/vv/cmd/utils"
 	"github.com/spf13/cobra"
 )
 

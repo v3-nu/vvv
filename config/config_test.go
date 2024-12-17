@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/clysec/clycli/config"
+	"github.com/v3-nu/vv/config"
 )
 
 func TestGetAvailableSettings(t *testing.T) {

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/clysec/clycli/cmd"
+	"github.com/v3-nu/vv/cmd"
 )
 
 func main() {

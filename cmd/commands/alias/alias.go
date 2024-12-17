@@ -6,8 +6,8 @@ import (
 
 	"log"
 
-	"github.com/clysec/clycli/cmd/utils"
-	"github.com/clysec/clycli/config"
+	"github.com/v3-nu/vv/cmd/utils"
+	"github.com/v3-nu/vv/config"
 	"github.com/spf13/cobra"
 )
 

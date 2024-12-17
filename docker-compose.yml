@@ -1,6 +1,6 @@
 services:
-  clycli:
+  vv:
     build:
       context: .
       dockerfile: Dockerfile
-    image: clysec/clycli:latest
+    image: ghcr.io/v3-nu/vv:latest
