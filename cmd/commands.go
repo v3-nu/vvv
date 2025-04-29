@@ -7,15 +7,15 @@ import (
 
 	gofigure "github.com/common-nighthawk/go-figure"
 	"github.com/spf13/cobra"
-	"github.com/v3-nu/vv/cmd/commands/alias"
-	"github.com/v3-nu/vv/cmd/commands/crypto"
-	"github.com/v3-nu/vv/cmd/commands/install"
-	"github.com/v3-nu/vv/cmd/commands/kubectl"
-	"github.com/v3-nu/vv/cmd/commands/packages"
-	"github.com/v3-nu/vv/cmd/commands/txt"
-	"github.com/v3-nu/vv/cmd/commands/uploads"
-	"github.com/v3-nu/vv/cmd/utils"
-	"github.com/v3-nu/vv/config"
+	"github.com/v3-nu/vvv/cmd/commands/alias"
+	"github.com/v3-nu/vvv/cmd/commands/crypto"
+	"github.com/v3-nu/vvv/cmd/commands/install"
+	"github.com/v3-nu/vvv/cmd/commands/kubectl"
+	"github.com/v3-nu/vvv/cmd/commands/packages"
+	"github.com/v3-nu/vvv/cmd/commands/txt"
+	"github.com/v3-nu/vvv/cmd/commands/uploads"
+	"github.com/v3-nu/vvv/cmd/utils"
+	"github.com/v3-nu/vvv/config"
 )
 
 var rootCommand *cobra.Command

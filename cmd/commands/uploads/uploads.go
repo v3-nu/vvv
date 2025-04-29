@@ -10,8 +10,8 @@ import (
 
 	"github.com/clysec/greq"
 	"github.com/spf13/cobra"
-	"github.com/v3-nu/vv/cmd/utils"
-	"github.com/v3-nu/vv/config"
+	"github.com/v3-nu/vvv/cmd/utils"
+	"github.com/v3-nu/vvv/config"
 )
 
 var ExportCommands = utils.CommandGroup{
