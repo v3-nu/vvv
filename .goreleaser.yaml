@@ -35,7 +35,7 @@ changelog:
 nfpms:
   - id: vvv
     package_name: "vvv"
-    description: "CLY CLI - A CLI tool for various tasks"
+    description: "VVV CLI - A CLI tool for various tasks"
     vendor: "Cloudyne Systems"
     maintainer: Cloudyne Systems <support@cloudyne.org>
     file_name_template: >-
@@ -53,7 +53,7 @@ nfpms:
 
 release:
   github:
-    owner: clysec
+    owner: v3-nu
     name: vvv
 
 # dockers:
