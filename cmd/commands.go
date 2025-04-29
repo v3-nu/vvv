@@ -5,6 +5,8 @@ import (
 	"log"
 	"os"
 
+	gofigure "github.com/common-nighthawk/go-figure"
+	"github.com/spf13/cobra"
 	"github.com/v3-nu/vv/cmd/commands/alias"
 	"github.com/v3-nu/vv/cmd/commands/crypto"
 	"github.com/v3-nu/vv/cmd/commands/install"
@@ -14,8 +16,6 @@ import (
 	"github.com/v3-nu/vv/cmd/commands/uploads"
 	"github.com/v3-nu/vv/cmd/utils"
 	"github.com/v3-nu/vv/config"
-	gofigure "github.com/common-nighthawk/go-figure"
-	"github.com/spf13/cobra"
 )
 
 var rootCommand *cobra.Command
@@ -40,18 +40,26 @@ func Execute() {
 		Long:    figure.ColorString(),
 		Aliases: []string{"cly", "cy", "cc"},
 	}
-
-	for _, group := range registerGroups {
-		group.Register(rootCommand)
-	}
-
 	cfg, err := config.LoadConfig()
 	if err != nil {
 		log.Printf("Failed to load config: %v", err)
 	}
 
-	ctx := context.WithValue(context.Background(), config.ConfigKey("config"), cfg)
-	err = rootCommand.ExecuteContext(ctx)
+	ctx := context.WithValue(context.TODO(), config.ConfigKey("config"), cfg)
+	rootCommand.SetContext(ctx)
+
+	for _, group := range registerGroups {
+		group.Register(rootCommand)
+	}
+
+	// cfg, err := config.LoadConfig()
+	// if err != nil {
+	// 	log.Printf("Failed to load config: %v", err)
+	// }
+
+	// ctx := context.WithValue(context.Background(), config.ConfigKey("config"), cfg)
+	// err = rootCommand.ExecuteContext(ctx)
+	err = rootCommand.Execute()
 	if err != nil {
 		os.Exit(1)
 	}

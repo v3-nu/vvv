@@ -86,6 +86,20 @@ func RunBash(command string, args ...any) {
 	}
 }
 
+func GetStringFlag(cmd *cobra.Command, name string, defaultValue string) string {
+	flag := cmd.Flag(name)
+	if flag == nil || flag.Value == nil {
+		return defaultValue
+	}
+
+	value := flag.Value.String()
+	if value == "" {
+		return defaultValue
+	}
+
+	return value
+}
+
 // func SplitAndRun(command, separator string, args ...string) {
 // 	split := strings.Split(command, " ")
 
