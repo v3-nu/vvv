@@ -14,6 +14,6 @@ func (c *CommandGroup) RegisterChildren() {
 }
 
 func (c *CommandGroup) Register(root *cobra.Command) {
-	c.RegisterChildren()
 	root.AddCommand(c.Command)
+	c.RegisterChildren()
 }

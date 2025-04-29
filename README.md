@@ -47,7 +47,12 @@ You can also download the binaries from the [Releases](https://github.com/v3-nu/
     - [x] nodejs - `Install NodeJS`
     - [x] acme-shell - `Install acme.sh`
   - [ ] kubectl (k, k8s)
-    - 
+  - [ ] uploads
+    - [ ] transfersh
+      - vv config set transfershUrl "https://x"
+      - vv config set transfershUsername "username"
+      - vv config set transfershPassword "password"
+    - [ ] pastebin
 
 
 ## Default Aliases
