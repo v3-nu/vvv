@@ -53,6 +53,30 @@ You can also download the binaries from the [Releases](https://github.com/v3-nu/
       - vv config set transfershUsername "username"
       - vv config set transfershPassword "password"
     - [ ] pastebin
+  - [ ] secenv
+    - [x] init
+    - [x] list
+    - [x] set
+    - [x] get
+    - [x] run
+    - [x] source
+
+
+    - [ ] set
+    - [ ] get
+    - [ ] run
+    - [ ] export
+  - [ ] sync
+    - [ ] config
+      - Cloudflare KV
+        - account_id
+        - namespace
+        - auth (email/key, token, oauth?)
+        - https://github.com/zalando/go-keyring
+      - Email//Key
+  - Viper for config 
+    - https://github.com/spf13/viper
+      
 
 
 ## Default Aliases

@@ -27,14 +27,56 @@ var ExportCommands = utils.CommandGroup{
 }
 
 func UploadPastebin(cmd *cobra.Command) {
-	cmd.AddCommand(
-		&cobra.Command{
-			Use:     "pastebin",
-			Aliases: []string{"paste", "pb"},
-			Short:   "Upload a file to pastebin",
-			Long:    "Upload a file to pastebin. To configure the pastebin server and type of service, see the \"vvv config upload pastebin\" command.",
-			Run: func(cmd *cobra.Command, args []string) {
-				conn, err := net.Dial("tcp", "termbin.com:9999")
+	configs := utils.FindContext(cmd).Value(config.ConfigKey("config")).(*config.Config)
+	configServer := configs.Settings.Uploads.PastebinUrl
+
+	uploadCommand := &cobra.Command{
+		Use:     "pastebin",
+		Aliases: []string{"paste", "pb"},
+		Short:   "Upload a file to pastebin",
+		Long:    "Upload a file to pastebin. To configure the pastebin server and type of service, see the \"vvv config upload pastebin\" command.",
+		Run: func(cmd *cobra.Command, args []string) {
+			serverFlag := utils.GetStringFlag(cmd, "server", configServer)
+			if serverFlag == "" {
+				serverFlag = "termbin.com:9999"
+			}
+
+			content := []byte{}
+
+			if len(args) > 0 {
+				filename := args[0]
+				file, err := os.Open(filename)
+				if err != nil {
+					fmt.Println("Error opening file: ", err)
+					return
+				}
+				defer file.Close()
+
+				content, err = io.ReadAll(file)
+				if err != nil {
+					fmt.Println("Error reading file: ", err)
+					return
+				}
+			} else {
+				content, _ = io.ReadAll(os.Stdin)
+			}
+
+			if strings.HasPrefix(serverFlag, "http://") || strings.HasPrefix(serverFlag, "https://") {
+				resp, err := greq.PostRequest(serverFlag).WithByteBody(content).Execute()
+				if err != nil {
+					fmt.Println("Error uploading to pastebin: ", err)
+					return
+				}
+				respBody, err := resp.BodyString()
+				if err != nil {
+					fmt.Println("Error reading response body: ", err)
+					return
+				}
+
+				fmt.Println("Uploaded to pastebin: \r\n", respBody)
+				os.Exit(0)
+			} else {
+				conn, err := net.Dial("tcp", serverFlag)
 				if err != nil {
 					fmt.Println("Error connecting to termbin: ", err)
 				}
@@ -49,9 +91,12 @@ func UploadPastebin(cmd *cobra.Command) {
 				fmt.Println(string(data))
 
 				conn.Close()
-			},
+			}
 		},
-	)
+	}
+	uploadCommand.Flags().StringP("server", "s", "", fmt.Sprintf("The server to upload to (default: %s)", configServer))
+
+	cmd.AddCommand(uploadCommand)
 }
 
 func UploadTransfersh(cmd *cobra.Command) {

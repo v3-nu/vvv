@@ -12,6 +12,8 @@ import (
 	"github.com/v3-nu/vvv/cmd/commands/install"
 	"github.com/v3-nu/vvv/cmd/commands/kubectl"
 	"github.com/v3-nu/vvv/cmd/commands/packages"
+	"github.com/v3-nu/vvv/cmd/commands/secenv"
+	"github.com/v3-nu/vvv/cmd/commands/test"
 	"github.com/v3-nu/vvv/cmd/commands/txt"
 	"github.com/v3-nu/vvv/cmd/commands/uploads"
 	"github.com/v3-nu/vvv/cmd/utils"
@@ -29,6 +31,8 @@ var registerGroups = []utils.CommandGroup{
 	alias.ExportCommands,
 	crypto.ExportCommands,
 	txt.ExportCommands,
+	secenv.ExportCommands,
+	test.ExportCommands,
 }
 
 func Execute() {

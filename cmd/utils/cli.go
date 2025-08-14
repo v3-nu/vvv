@@ -1,12 +1,15 @@
 package utils
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 	"os/exec"
 	"strings"
+	"syscall"
 
 	"github.com/spf13/cobra"
+	"golang.org/x/term"
 )
 
 func StringSliceToAnySlice(args []string) []any {
@@ -100,18 +103,53 @@ func GetStringFlag(cmd *cobra.Command, name string, defaultValue string) string 
 	return value
 }
 
-// func SplitAndRun(command, separator string, args ...string) {
-// 	split := strings.Split(command, " ")
+func AskString(prompt string, hidden bool) string {
+	fmt.Println(prompt)
 
-// 	cx := exec.Command(split[0], append(split[1:], args...)...)
-// 	cx.Env = os.Environ()
+	if hidden {
+		val, err := term.ReadPassword(int(syscall.Stdin))
+		if err != nil {
+			fmt.Println("Error reading input:", err)
+			os.Exit(1)
+		}
 
-// 	cx.Stdout = os.Stdout
-// 	cx.Stderr = os.Stderr
+		return string(val)
+	}
 
-// 	err := cx.Run()
+	reader := bufio.NewReader(os.Stdin)
+	val, err := reader.ReadString('\n')
+	if err != nil {
+		fmt.Println("Error reading input:", err)
+		os.Exit(1)
+	}
+
+	return val
+}
+
+// // func SplitAndRun(command, separator string, args ...string) {
+// // 	split := strings.Split(command, " ")
+
+// // 	cx := exec.Command(split[0], append(split[1:], args...)...)
+// // 	cx.Env = os.Environ()
+
+// // 	cx.Stdout = os.Stdout
+// // 	cx.Stderr = os.Stderr
+
+// // 	err := cx.Run()
+// // 	if err != nil {
+// // 		fmt.Println("Error listing contexts:", err)
+// // 		os.Exit(cx.ProcessState.ExitCode())
+// // 	}
+// // }
+
+// func AskPassword(prompt string) string {
+// 	fmt.Println(prompt)
+// 	var inpt string
+// 	_, err := fmt.Scanln(&inpt)
 // 	if err != nil {
-// 		fmt.Println("Error listing contexts:", err)
-// 		os.Exit(cx.ProcessState.ExitCode())
+// 		fmt.Println("Error reading input:", err)
+// 		os.Exit(1)
 // 	}
+
+// 	return inpt
 // }
