@@ -89,6 +89,19 @@ func RunBash(command string, args ...any) {
 	}
 }
 
+func RunBashReturn(command string, args ...any) ([]byte, error) {
+	countArgs := strings.Count(command, "%s")
+	if countArgs < len(args) {
+		repeat := len(args) - countArgs
+		command += strings.Repeat(" %s", repeat)
+	}
+
+	cx := exec.Command("bash", "-c", fmt.Sprintf(command, args...))
+	cx.Env = os.Environ()
+
+	return cx.Output()
+}
+
 func GetStringFlag(cmd *cobra.Command, name string, defaultValue string) string {
 	flag := cmd.Flag(name)
 	if flag == nil || flag.Value == nil {

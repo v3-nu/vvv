@@ -18,5 +18,7 @@ var ExportCommands = utils.CommandGroup{
 		KubectlSetNamespace,
 		KubectlRemoveFinalizers,
 		KubectlGetDecodedSecret,
+		KubectlChooseContext,
+		KubectlChooseNamespace,
 	},
 }

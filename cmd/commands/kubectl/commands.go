@@ -1,8 +1,13 @@
 package kubectl
 
 import (
+	"bytes"
+	"fmt"
+
+	"github.com/rivo/tview"
 	"github.com/spf13/cobra"
 	"github.com/v3-nu/vvv/cmd/utils"
+	"github.com/v3-nu/vvv/internal/types"
 )
 
 func KubectlListContexts(cmd *cobra.Command) {
@@ -70,4 +75,87 @@ func KubectlGetDecodedSecret(cmd *cobra.Command) {
 			},
 		},
 	)
+}
+
+func KubectlChooseNamespace(cmd *cobra.Command) {
+	cmdx := &cobra.Command{
+		Use:     "namespace",
+		Aliases: []string{"ns", "n"},
+		Short:   "Choose a kubeconfig namespace",
+		Run: func(cmd *cobra.Command, args []string) {
+			app := tview.NewApplication()
+
+			list := tview.NewList()
+
+			namespaces, err := utils.RunBashReturn("kubectl get namespaces -o name")
+			if err != nil {
+				fmt.Println("Error getting namespaces:", err)
+				return
+			}
+
+			for _, ns := range bytes.Split(namespaces, []byte{'\n'}) {
+				nsx := bytes.TrimPrefix(ns, []byte("namespace/"))
+				if len(nsx) == 0 {
+					continue
+				}
+				list = list.AddItem(string(nsx), "", 0, func() {
+					utils.RunBash("kubectl config set-context --current --namespace " + string(nsx))
+					app.Stop()
+				})
+			}
+
+			list = list.AddItem("Exit", "Press to exit", 'q', func() {
+				app.Stop()
+			})
+
+			if err := app.SetRoot(list, true).EnableMouse(true).Run(); err != nil {
+				panic(err)
+			}
+		},
+	}
+
+	cmd.AddCommand(cmdx)
+}
+
+func KubectlChooseContext(cmd *cobra.Command) {
+	cmdx := &cobra.Command{
+		Use:     "context",
+		Aliases: []string{"ctx", "c"},
+		Short:   "Choose a kubeconfig context",
+		Run: func(cmd *cobra.Command, args []string) {
+			app := tview.NewApplication()
+
+			list := tview.NewList()
+
+			kubeconfig, err := types.TryGetKubeConfig()
+			if err != nil {
+				fmt.Println("Error reading kubeconfig:", err)
+				return
+			}
+
+			for _, cx := range kubeconfig.Contexts {
+				ctxName := cx.Name
+				ctxDesc := cx.Context.Namespace
+
+				if kubeconfig.ClustersMap[cx.Context.Cluster].Name != "" {
+					ctxDesc = fmt.Sprintf("%s (ns: %s)", kubeconfig.ClustersMap[cx.Context.Cluster].Cluster.Server, cx.Context.Namespace)
+				}
+
+				list = list.AddItem(ctxName, ctxDesc, 0, func() {
+					utils.RunBash("kubectl config use-context " + cx.Name)
+					app.Stop()
+				})
+			}
+
+			list = list.AddItem("Exit", "Press to exit", 'q', func() {
+				app.Stop()
+			})
+
+			if err := app.SetRoot(list, true).EnableMouse(true).Run(); err != nil {
+				panic(err)
+			}
+		},
+	}
+
+	cmd.AddCommand(cmdx)
 }
