@@ -6,7 +6,6 @@ require (
 	github.com/99designs/keyring v1.2.2
 	github.com/clysec/greq v0.2.1
 	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be
-	github.com/hanwen/go-fuse/v2 v2.7.2
 	github.com/rivo/tview v0.0.0-20250625164341-a4a78f1e05cb
 	github.com/scheiblingco/gofn v1.2.3
 	github.com/spf13/cobra v1.8.1

@@ -1,12 +1,12 @@
 package secenv
 
-import (
-	"github.com/hanwen/go-fuse/v2/fs"
-)
+// import (
+// 	"github.com/hanwen/go-fuse/v2/fs"
+// )
 
-type HelloRoot struct {
-	fs.Inode
-}
+// type HelloRoot struct {
+// 	fs.Inode
+// }
 
 // func (r *HelloRoot) OnAdd(ctx context.Context) {
 // 	// ch := r.NewPersistentInode(
