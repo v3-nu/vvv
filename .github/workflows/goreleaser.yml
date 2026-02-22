@@ -18,18 +18,18 @@ jobs:
         go-version: 1.23.0
       id: go
 
-    - name: Docker login
-      uses: docker/login-action@v3
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    #- name: Docker login
+    #  uses: docker/login-action@v3
+    #  with:
+    #    username: ${{ secrets.DOCKERHUB_USERNAME }}
+    #    password: ${{ secrets.DOCKERHUB_PASSWORD }}
     
-    - name: Login to ghcr
-      uses: docker/login-action@v3
-      with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+    #- name: Login to ghcr
+    #  uses: docker/login-action@v3
+    #  with:
+    #    registry: ghcr.io
+    #    username: ${{ github.actor }}
+    #   password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Goreleaser
       uses: goreleaser/goreleaser-action@v2
